@@ -265,6 +265,7 @@ footer {
 
 .formBoxRight {
     flex: 0 1 50%;
+    align-self: center;
 }
 
 .formBoxRight span {
