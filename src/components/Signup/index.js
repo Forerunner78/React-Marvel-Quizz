@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { auth } from '../Firebase/firebaseConfig';
-import { useNavigate  } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 
 const Signup = (props) => {
 
@@ -75,6 +75,9 @@ const Signup = (props) => {
                             </div>
                             {btn}
                         </form>
+                        <div className='linkContainer'>
+                            <Link className='simpleLink' to="/login">Déjà inscrit? Connectez-vous</Link>
+                        </div>
                     </div>
                 </div>
             </div>
