@@ -11,18 +11,18 @@ import ErrorPage from '../ErrorPage';
 function App() {
 	return (
 		<Router>
-        <Header />
+			<Header />
 
-        <Routes>
-			<Route path="/" element={<Landing />} />
-			<Route path="/welcome" element={<Welcome />} />
-			<Route path="/login" element={<Login />} />
-			<Route path="/signup" element={<Signup />} />
-			<Route path="*" element={<ErrorPage />} />
-        </Routes>
+			<Routes>
+				<Route path="/" element={<Landing />} />
+				<Route path="/welcome" element={<Welcome />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<Signup />} />
+				<Route path="*" element={<ErrorPage />} />
+			</Routes>
 
-        <Footer />
-    </Router>
+			<Footer />
+		</Router>
 	);
 }
 
