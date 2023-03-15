@@ -1,8 +1,12 @@
+import Logout from "../Logout";
+import Quiz from "../Quiz";
+
 const Welcome = () => {
     return ( 
         <div className='quiz-bg'>
             <div className="container">
-TEST
+                <Logout />
+                <Quiz />
             </div>
         </div>
     );
