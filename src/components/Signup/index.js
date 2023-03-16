@@ -1,10 +1,13 @@
-// Firebase 7, 9 et 9 en POO
-import { useState } from 'react'
-import { createUserWithEmailAndPassword } from '@firebase/auth';
-import { auth } from '../Firebase/firebaseConfig';
-import { Link, useNavigate  } from 'react-router-dom';
+// Firebase 9
+import { useState } from 'react';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, user } from '../Firebase/firebaseConfig';
+import { setDoc } from 'firebase/firestore'
+import { Link, useNavigate } from 'react-router-dom';
 
-const Signup = (props) => {
+const Signup = () => {
+
+    const navigate = useNavigate();
 
     const data = {
         pseudo: '',
@@ -14,8 +17,7 @@ const Signup = (props) => {
     }
 
     const [loginData, setLoginData] = useState(data);
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
+    const [error, setError] = useState('')
 
     const handleChange = e => {
         setLoginData({...loginData, [e.target.id]: e.target.value});
@@ -23,14 +25,21 @@ const Signup = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const { email, password } = loginData;
+        const { email, password, pseudo } = loginData;
         createUserWithEmailAndPassword(auth, email, password)
-        .then(user => {
+        .then( authUser => {
+            return setDoc(user(authUser.user.uid), {
+                pseudo,
+                email
+            });
+        })
+        .then(() => {
             setLoginData({...data});
             navigate('/welcome');
         })
         .catch(error => {
             setError(error);
+            setLoginData({...data});
         })
     }
 
@@ -73,10 +82,11 @@ const Signup = (props) => {
                                 <input onChange={handleChange} value={confirmPassword} type="password" id="confirmPassword" autoComplete="off" required />
                                 <label htmlFor="confirmPassword">Confirmer le mot de passe</label>
                             </div>
+
                             {btn}
                         </form>
-                        <div className='linkContainer'>
-                            <Link className='simpleLink' to="/login">Déjà inscrit? Connectez-vous</Link>
+                        <div className="linkContainer">
+                            <Link className="simpleLink" to="/login">Déjà inscrit? Connectez-vous.</Link>
                         </div>
                     </div>
                 </div>
