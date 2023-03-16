@@ -1,16 +1,13 @@
 import { Component } from "react";
+import Levels from "../Levels";
+import ProgressBar from "../Progressbar";
 
 class Quiz extends Component {
     render() {
-
-        const {pseudo} = this.props.userData;
         return ( 
             <div>
-                <div>
-                    <h2>
-                        Pseudo: {pseudo}
-                    </h2>
-                </div>
+                <Levels />
+                <ProgressBar />
             </div>
         );
     }
