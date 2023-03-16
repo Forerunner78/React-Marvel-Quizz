@@ -14,6 +14,6 @@ const config = {
 const app = initializeApp(config);
 export const auth = getAuth(app);
 
-export const firestore = getFirestore();
+export const firestore = getFirestore(app);
 
 export const user = (uid) => doc(firestore, `users/${uid}`);
