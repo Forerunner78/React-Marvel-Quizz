@@ -4,8 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../Firebase/firebaseConfig';
 import { sendPasswordResetEmail } from 'firebase/auth';
 
-
-const ForgetPassword = props => {
+const ForgetPassword = () => {
 
     const [email, setEmail] = useState("");
     const [success, setSuccess] = useState(null);
@@ -28,7 +27,6 @@ const ForgetPassword = props => {
             setError(error);
             setEmail("");
         })
-
     }
 
     const disabled = email === "";
