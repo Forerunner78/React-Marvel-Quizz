@@ -77,7 +77,7 @@ class Quiz extends Component {
                 score: prevState.score + 1,
             }));
 
-            toast.success("Bravo +1", {
+            toast.success("Bravo, bonne réponse +1", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -85,10 +85,10 @@ class Quiz extends Component {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: "colored",
             });
         } else {
-            toast.error("Raté 0", {
+            toast.error("Mauvaise réponse 0", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -96,7 +96,7 @@ class Quiz extends Component {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: "colored",
             });
         }
     };
@@ -115,7 +115,7 @@ class Quiz extends Component {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: "colored",
             });
         }
     };
