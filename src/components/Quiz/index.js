@@ -97,7 +97,6 @@ class Quiz extends Component {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                bodyClassName: "toastify-color",
             });
         }
     };
