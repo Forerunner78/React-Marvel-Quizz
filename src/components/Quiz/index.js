@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { QuizMarvel } from "../quizMarvel";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Levels from "../Levels";
 import ProgressBar from "../Progressbar";
 
@@ -48,6 +50,10 @@ class Quiz extends Component {
                 btnDisabled: true,
             });
         }
+
+        if (this.props.userData.pseudo) {
+            this.showWelcomeMsg(this.props.userData.pseudo);
+        }
     }
 
     submitAnswer = (selectedAnswer) => {
@@ -70,6 +76,48 @@ class Quiz extends Component {
             this.setState((prevState) => ({
                 score: prevState.score + 1,
             }));
+
+            toast.success("Bravo +1", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } else {
+            toast.error("Raté 0", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                bodyClassName: "toastify-color",
+            });
+        }
+    };
+
+    showWelcomeMsg = (pseudo) => {
+        if (!this.state.showWelcomeMsg) {
+            this.setState({
+                showWelcomeMsg: true,
+            });
+
+            toast.warn(`Bienvenu ${pseudo} et bonne chance`, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     };
 
@@ -84,6 +132,7 @@ class Quiz extends Component {
         btnDisabled: true,
         userAnswer: null,
         score: 0,
+        showWelcomeMsg: false,
     };
 
     render() {
@@ -103,6 +152,7 @@ class Quiz extends Component {
 
         return (
             <div>
+                <ToastContainer />
                 <Levels />
                 <ProgressBar />
                 <h2>{this.state.question}</h2>
@@ -112,7 +162,7 @@ class Quiz extends Component {
                 <button
                     disabled={this.state.btnDisabled}
                     className="btnSubmit"
-                    onclick={this.nextQuestion}
+                    onClick={this.nextQuestion}
                 >
                     Suivant
                 </button>
