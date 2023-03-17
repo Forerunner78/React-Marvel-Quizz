@@ -17,3 +17,5 @@ export const auth = getAuth(app);
 export const firestore = getFirestore(app);
 
 export const user = (uid) => doc(firestore, `users/${uid}`);
+// Peut aussi s'écrire:
+// export const user = (uid) => doc(firestore, "users", uid);
