@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const QuizOver = React.forwardRef((props, ref) => {
-    const { levelNames, score, maxQuestions, quizLevel, percent } = props;
+    const { levelNames, score, maxQuestions, quizLevel, percent, loadLevelQuestions } = props;
     const [asked, setAsked] = useState([]);
 
     useEffect(() => {
@@ -9,6 +9,13 @@ const QuizOver = React.forwardRef((props, ref) => {
     }, [ref]);
 
     const averageGrade = maxQuestions / 2;
+
+    if (score < averageGrade) {
+        setTimeout(() => {
+            loadLevelQuestions(quizLevel);
+        }, 3000);
+    }
+
     const decision =
         score >= averageGrade ? (
             <React.Fragment>
@@ -16,12 +23,22 @@ const QuizOver = React.forwardRef((props, ref) => {
                     {quizLevel < levelNames.length ? (
                         <React.Fragment>
                             <p className="successMsg">Bravo, passez au niveau suivant</p>
-                            <button className="btnResult success">Niveau suivant</button>
+                            <button
+                                className="btnResult success"
+                                onClick={() => loadLevelQuestions(quizLevel)}
+                            >
+                                Niveau suivant
+                            </button>
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
                             <p className="successMsg">Bravo, vous êtes un expert</p>
-                            <button className="btnResult gameOver">Niveau suivant</button>
+                            <button
+                                className="btnResult gameOver"
+                                onClick={() => loadLevelQuestions(0)}
+                            >
+                                Acceuil
+                            </button>
                         </React.Fragment>
                     )}
                 </div>
@@ -63,6 +80,7 @@ const QuizOver = React.forwardRef((props, ref) => {
         ) : (
             <tr>
                 <td colSpan="3">
+                    <div className="loader"></div>
                     <p style={{ textAlign: "center", color: "red" }}>Pas de réponse</p>
                 </td>
             </tr>
@@ -70,14 +88,6 @@ const QuizOver = React.forwardRef((props, ref) => {
 
     return (
         <React.Fragment>
-            <div className="stepsBtnContainer">
-                <p className="successMsg">Bravo, vous êtes un expert</p>
-                <button className="btnResult success">Niveau suivant</button>
-            </div>
-            <div className="percentage">
-                <div className="progressPercent">Réussite: 10%</div>
-                <div className="progressPercent">Note: 10/10</div>
-            </div>
             {decision}
             <hr />
             <p>Les réponses aux questions posées</p>
