@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { QuizMarvel } from "../quizMarvel";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Levels from "../Levels";
 import ProgressBar from "../Progressbar";
+import QuizOver from "../QuizOver";
 
 class Quiz extends Component {
     getLevelNames = () => {
@@ -63,8 +64,15 @@ class Quiz extends Component {
         });
     };
 
+    gameOver = () => {
+        this.setState({
+            quizEnd: true,
+        });
+    };
+
     nextQuestion = () => {
         if (this.state.idQuestion === this.state.maxQuestions - 1) {
+            this.gameOver();
         } else {
             this.setState((prevState) => ({
                 idQuestion: prevState.idQuestion + 1,
@@ -77,7 +85,7 @@ class Quiz extends Component {
                 score: prevState.score + 1,
             }));
 
-            toast.success("Bravo +1", {
+            toast.success("Bravo, bonne réponse +1", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -85,10 +93,10 @@ class Quiz extends Component {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: "colored",
             });
         } else {
-            toast.error("Raté 0", {
+            toast.error("Mauvaise réponse 0", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -96,8 +104,7 @@ class Quiz extends Component {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
-                bodyClassName: "toastify-color",
+                theme: "colored",
             });
         }
     };
@@ -116,7 +123,7 @@ class Quiz extends Component {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: "light",
+                theme: "colored",
             });
         }
     };
@@ -133,6 +140,7 @@ class Quiz extends Component {
         userAnswer: null,
         score: 0,
         showWelcomeMsg: false,
+        quizEnd: false,
     };
 
     render() {
@@ -150,8 +158,10 @@ class Quiz extends Component {
             );
         });
 
-        return (
-            <div>
+        return this.state.quizEnd ? (
+            <QuizOver />
+        ) : (
+            <Fragment>
                 <ToastContainer />
                 <Levels />
                 <ProgressBar />
@@ -166,7 +176,7 @@ class Quiz extends Component {
                 >
                     Suivant
                 </button>
-            </div>
+            </Fragment>
         );
     }
 }
