@@ -1,9 +1,10 @@
 // Firebase 9
-import { useState, Fragment, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, user } from "../Firebase/firebaseConfig";
 import { getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader";
 import Logout from "../Logout";
 import Quiz from "../Quiz";
 
@@ -39,10 +40,10 @@ const Welcome = () => {
     }, [userSession]);
 
     return userSession === null ? (
-        <Fragment>
-            <div className="loader"></div>
-            <p className="loaderText">Loading ...</p>
-        </Fragment>
+        <Loader
+            loadingMsg={"Authentification ..."}
+            styling={{ textAlign: "center", color: "#FFFFFF" }}
+        />
     ) : (
         <div className="quiz-bg">
             <div className="container">
