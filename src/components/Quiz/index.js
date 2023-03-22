@@ -22,7 +22,6 @@ const initialState = {
     percent: null,
 };
 
-const levelNames = this.getLevelNames();
 class Quiz extends Component {
     constructor(props) {
         super(props);
@@ -52,7 +51,7 @@ class Quiz extends Component {
     };
 
     componentDidMount() {
-        this.loadQuestions(levelNames[this.state.quizLevel]);
+        this.loadQuestions(this.getLevelNames()[this.state.quizLevel]);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -79,8 +78,8 @@ class Quiz extends Component {
             this.gameOver(gradePercent);
         }
 
-        if (this.props.userData.pseudo !== prevProps.userData.pseudo) {
-            this.showToastMsg(this.props.userData.pseudo);
+        if (this.props.userPseudo !== prevProps.userPseudo) {
+            this.showToastMsg(this.props.userPseudo);
         }
     }
 
@@ -146,12 +145,14 @@ class Quiz extends Component {
     };
 
     showToastMsg = (pseudo) => {
+        console.log("pseudo quiz");
+        console.log(pseudo);
         if (!this.state.showWelcomeMsg) {
             this.setState({
                 showWelcomeMsg: true,
             });
 
-            toast.warn(`Bienvenu ${pseudo} et bonne chance`, {
+            toast.info(`Bienvenu ${pseudo} et bonne chance`, {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -166,7 +167,7 @@ class Quiz extends Component {
 
     loadLevelQuestions = (param) => {
         this.setState({ ...initialState, quizLevel: param });
-        this.loadQuestions(levelNames[param]);
+        this.loadQuestions(this.getLevelNames()[param]);
     };
 
     render() {
@@ -199,7 +200,7 @@ class Quiz extends Component {
         return quizEnd ? (
             <QuizOver
                 ref={this.storedDataRef}
-                levelNames={levelNames}
+                levelNames={this.getLevelNames()}
                 score={score}
                 maxQuestions={maxQuestions}
                 quizLevel={quizLevel}
@@ -209,7 +210,7 @@ class Quiz extends Component {
         ) : (
             <Fragment>
                 <ToastContainer />
-                <Levels levelNames={levelNames} quizLevel={quizLevel} />
+                <Levels levelNames={this.getLevelNames()} quizLevel={quizLevel} />
                 <ProgressBar idQuestion={idQuestion} maxQuestions={maxQuestions} />
                 <h2>{question}</h2>
 

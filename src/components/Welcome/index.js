@@ -12,7 +12,7 @@ const Welcome = () => {
     const navigate = useNavigate();
 
     const [userSession, setUserSession] = useState(null);
-    const [userData, setUserData] = useState({});
+    const [userPseudo, setUserPseudo] = useState("");
 
     useEffect(() => {
         const listener = onAuthStateChanged(auth, (user) => {
@@ -28,7 +28,11 @@ const Welcome = () => {
                         const docData = snapshot.data(); // objet
                         console.log(docData);
                         console.log(snapshot.id);
-                        setUserData(docData);
+                        if (docData.pseudo !== null) {
+                            setUserPseudo(docData.pseudo);
+                        } else {
+                            setUserPseudo("");
+                        }
                     }
                 })
                 .catch((error) => {
@@ -48,7 +52,7 @@ const Welcome = () => {
         <div className="quiz-bg">
             <div className="container">
                 <Logout />
-                <Quiz userData={userData} />
+                <Quiz userPseudo={userPseudo} />
             </div>
         </div>
     );
