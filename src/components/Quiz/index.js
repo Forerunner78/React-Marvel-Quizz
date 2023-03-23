@@ -105,6 +105,19 @@ class Quiz extends Component {
         }
     };
 
+    setToastConfiguration = () => {
+        return {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        };
+    };
+
     nextQuestion = () => {
         if (this.state.idQuestion === this.state.maxQuestions - 1) {
             this.setState({ quizEnd: true });
@@ -120,48 +133,19 @@ class Quiz extends Component {
                 score: prevState.score + 1,
             }));
 
-            toast.success("Bravo, bonne réponse +1", {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
+            toast.success("Bravo, bonne réponse +1", this.setToastConfiguration());
         } else {
-            toast.error("Mauvaise réponse 0", {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
+            toast.error("Mauvaise réponse 0", this.setToastConfiguration());
         }
     };
 
     showToastMsg = (pseudo) => {
-        console.log("pseudo quiz");
-        console.log(pseudo);
         if (!this.state.showWelcomeMsg) {
             this.setState({
                 showWelcomeMsg: true,
             });
 
-            toast.info(`Bienvenu ${pseudo} et bonne chance`, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            });
+            toast.info(`Bienvenu ${pseudo} et bonne chance`, this.setToastConfiguration());
         }
     };
 
