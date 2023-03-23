@@ -2,7 +2,7 @@ const Loader = ({ loadingMsg, styling }) => {
     return (
         <>
             <div className="loader"></div>
-            <p style={{ styling }}>{loadingMsg}</p>
+            <p style={styling}>{loadingMsg}</p>
         </>
     );
 };
