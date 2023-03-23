@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/React-Marvel-Quizz/static/css/main.43a58a3b.css",
-    "main.js": "/React-Marvel-Quizz/static/js/main.3ec13948.js",
+    "main.js": "/React-Marvel-Quizz/static/js/main.cab853b6.js",
     "static/js/787.a8f525ea.chunk.js": "/React-Marvel-Quizz/static/js/787.a8f525ea.chunk.js",
     "static/media/bg-noise-texture.png": "/React-Marvel-Quizz/static/media/bg-noise-texture.78eacb5efbf473356f4a.png",
     "static/media/spiderman.png": "/React-Marvel-Quizz/static/media/spiderman.54be21cf9a4177790824.png",
@@ -13,11 +13,11 @@
     "static/media/griffes-droit.png": "/React-Marvel-Quizz/static/media/griffes-droit.085de5685b6a33d9f1da.png",
     "index.html": "/React-Marvel-Quizz/index.html",
     "main.43a58a3b.css.map": "/React-Marvel-Quizz/static/css/main.43a58a3b.css.map",
-    "main.3ec13948.js.map": "/React-Marvel-Quizz/static/js/main.3ec13948.js.map",
+    "main.cab853b6.js.map": "/React-Marvel-Quizz/static/js/main.cab853b6.js.map",
     "787.a8f525ea.chunk.js.map": "/React-Marvel-Quizz/static/js/787.a8f525ea.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.43a58a3b.css",
-    "static/js/main.3ec13948.js"
+    "static/js/main.cab853b6.js"
   ]
 }
