@@ -65,7 +65,7 @@ const QuizOver = React.forwardRef((props, ref) => {
     };
 
     const capitalizeFirstLetter = (string) => {
-        return string.charArt(0).toUppercase() + string.slice(1);
+        return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
     const averageGrade = maxQuestions / 2;
@@ -173,7 +173,7 @@ const QuizOver = React.forwardRef((props, ref) => {
                 <div className="comicDetails">
                     <h3>Description</h3>
                     {characterInfos.data.results[0].description ? (
-                        <p>characterInfos.data.results[0].description</p>
+                        <p>{characterInfos.data.results[0].description}</p>
                     ) : (
                         <p>Description indisponible</p>
                     )}
